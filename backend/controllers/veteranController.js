@@ -40,7 +40,7 @@ exports.updateMe=catchAsync( async ( req, res, next ) => {
 
 
     //? (2) Filtered out unwanted field names that are not allowed to be updated
-    const filteredObj=filterObject( req.body, 'firstName', 'lastName', 'email' );
+    const filteredObj=filterObject( req.body);
     // console.log( req.file );
     // if ( req.file ) filteredObj.photo = req.file.filename;
 

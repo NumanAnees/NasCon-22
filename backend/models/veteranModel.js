@@ -21,7 +21,14 @@ const veteranSchema=new mongoose.Schema( {
         required: [ true, "Enter last name!" ],
         trim: true
     },
-
+    gender:{
+        enum:['male',"female"],
+        required:[true,"Please enter your gender"]
+    },
+    address:{
+        type:String,
+        required:[true,"Please enter your address"]
+    },
     email: { // Identifying users by email
         type: String,
         unique: [ true, "User with this email already exist" ],
@@ -76,6 +83,7 @@ const veteranSchema=new mongoose.Schema( {
 
     hobbies: [{
         type: String,
+        enum:["Reading","Traveling","Fishing","Crafting","Television","Bird Watching","Collecting","Music","Gardening","Video Games"],
         required:[true,"Please add some hobbies!"]
     }],
 
