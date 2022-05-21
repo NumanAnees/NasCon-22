@@ -137,3 +137,45 @@ exports.interestedInEvent=catchAsync( async ( req, res, next ) => {
         status: 'success',
     } );
 } );
+
+//Get all the veterans with matching hobbies
+exports.vetrensWithMatchingHobbies=catchAsync( async ( req, res, next ) => {
+    const doc=await Veteran.find();
+    const hobbies=req.body.hobbies;
+
+    const filtered= doc.filter((e)=>{
+        let check =false;
+        hobbies.forEach((el)=>{
+         if(e.hobbies.indexOf(el)!=-1)
+         check=true;
+        })
+        return check;
+    })
+
+
+    // ! SENDING THE REPONSE
+    res.status( 200 ).json( {
+        status: 'success',
+        results: filtered.length,
+        data: {
+            data: filtered
+        }
+    } );
+
+} );
+
+
+//Get the post of all the veteran followed
+exports.getPostOfVeteranFollowed=catchAsync( async ( req, res, next ) => {
+    const followedPeople=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
+    let persons;
+   posts= followedPeople.map( async (el) => {
+       return (await Veteran.findById( el ).select("Posts")).Posts; 
+   } )
+    let data=await Promise.all(posts)
+    res.status( 200 ).json( {
+        status: 'success',
+        data
+    } );
+} )
+
