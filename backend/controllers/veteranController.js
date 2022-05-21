@@ -176,18 +176,18 @@ function shuffle1(arr) {
 //Get the post of all the veteran followed
 exports.getPostOfVeteranFollowed=catchAsync( async ( req, res, next ) => {
     const followedPeople=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
-    let persons;
-   posts= followedPeople.map( async (el) => {
-      
-    let obj=(await Veteran.findById( el ).select("Posts firstName lastName"));
-
-       return {firstName:obj.firstName,lastName:obj.lastName,Posts:obj.Posts}; 
+    let renderPosts=[2];
+    followedPeople.forEach( async (el) => {
+    let {firstName,lastName,Posts}=await Veteran.findById( el ).select("Posts firstName lastName");
+    Posts.forEach((ell)=>{ 
+     renderPosts.push({firstName:firstName,lastName:lastName,posts:ell});;
+    })
+ 
    } )
-    let data=await Promise.all(posts)
-    data=shuffle1(data.flat())
+    console.log(renderPosts);
     res.status( 200 ).json( {
         status: 'success',
-        data
+        data:renderPosts
     } );
 } )
 

@@ -2,6 +2,7 @@ import React from 'react'
 import "../css/events.css"
 import TableComp from "../components/TableComp/TableComp"
 import {  Space } from 'antd';
+import { PageHeader } from './PageHeader';
 
 const Events = () => {
     const columns = [
@@ -50,27 +51,28 @@ for (let i = 0; i < 5; i++) {
   return (
     <>
     {/* -----------------------------My Created Events-------------------------------------- */}
-    <div>
+    <PageHeader subHeading='You can add new Community Service Events.' heading='Created Events' toLink="/dashboard/addnewevent" btnText='+ Add new event' />
+    <div style={{margin:"1rem 2rem"}}>
         <div>
-            <h2 className='text-center heading-events'>My Created Events</h2>
+            {/* <h2 className='text-center heading-events'>My Created Events</h2> */}
             <div className="padding-Table">
             <TableComp data={data} columns={columns} />
             </div>
         </div>
     </div>
     {/* -----------------------------My Created Events-------------------------------------- */}
-     <div>
+    <PageHeader subHeading='You can view interested events.' heading='Interested Events' />
+     <div  style={{margin:"0rem 2rem"}}>
         <div>
-            <h2 className='text-center heading-events'>My Interested Events</h2>
             <div className="padding-Table">
             <TableComp data={data} columns={columns} />
             </div>
         </div>
     </div>    
     {/* -----------------------------My Created Events-------------------------------------- */}
-    <div>
+    <PageHeader subHeading='You can view suggested events depending on your hobbies.' heading='Suggested Events' />
+    <div  style={{margin:"0rem 2rem"}}>
         <div>
-            <h2 className='text-center heading-events'>Suggested Events</h2>
             <div className="padding-Table">
             <TableComp data={data} columns={columns} />
             </div>
