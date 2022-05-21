@@ -5,7 +5,7 @@ import {  Space } from 'antd';
 import { PageHeader } from './PageHeader';
 
 const Events = () => {
-    const columns = [
+const columns = [
   {
     title: 'Name',
     dataIndex: 'name',

@@ -13,6 +13,7 @@ import Events from "./components/Events"
 import UserProfile from "./components/UserProfile"
 import Invitations from "./components/invitations"
 import { Link, Outlet } from 'react-router-dom'
+import Event from "./components/Event"
 import LoginOrgProfile from "./components/LoginOrgProfile"
 
 
@@ -51,6 +52,8 @@ function App() {
         <Route exact path="/userprofile" element={<UserProfile />} />
         <Route exact path="/orgprofile" element={<OrgProfile />} />
         <Route exact path="/loginorgprofile" element={<LoginOrgProfile />} />
+        <Route exact path="/event" element={<Event />} />
+
 
 
 

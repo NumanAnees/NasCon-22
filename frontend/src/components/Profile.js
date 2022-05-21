@@ -17,7 +17,7 @@ const Profile=() => {
            <Divider orientation="left" plain>
             Hobbies
       </Divider>
-          <ul className='list'>
+          <ul className='list-st'>
             {
               user.hobbies.map( el => {
                 return <li>{el}</li>
