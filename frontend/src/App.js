@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard'
 import LoginForm from './components/Login';
 import UserProfile from "./components/UserProfile"
 
+
 import { Link, Outlet } from 'react-router-dom'
 
 
@@ -18,6 +19,7 @@ import "antd/dist/antd.css";
 import Landing from "./components/LandingPage/Landing";
 import Profile from './components/Profile';
 import Organization from './components/Organization';
+import People from './components/People';
 
 
 function App() {
@@ -74,6 +76,12 @@ function App() {
            <Route exact path="organizations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Organization />
+            // </ProtectedRoute> 
+          }
+          />
+          <Route exact path="people" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <People />
             // </ProtectedRoute> 
           }
           />

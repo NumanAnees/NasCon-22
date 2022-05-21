@@ -37,7 +37,7 @@ export const SideNavbar=( props ) => {
 
           {
             <li>
-              <Link to='/dashboard/candidates' className={`nav-link  ${location.pathname.includes( "people" )? "side_bar_active":'side_bar_link'}`}>
+              <Link to='/dashboard/people' className={`nav-link  ${location.pathname.includes( "people" )? "side_bar_active":'side_bar_link'}`}>
                 <span className='side_bar_icon'> <PeopleIcon /> </span>
                 People
               </Link>
@@ -46,13 +46,12 @@ export const SideNavbar=( props ) => {
 
           {
             <li>
-              <Link to='/dashboard/employees' className={`nav-link  ${location.pathname.includes( "events" )? "side_bar_active":'side_bar_link'}`}>
+              <Link to='/dashboard/events' className={`nav-link  ${location.pathname.includes( "events" )? "side_bar_active":'side_bar_link'}`}>
                 <span className='side_bar_icon'> <PeopleIcon /> </span>
                 Events
               </Link>
             </li>
           }
-          
         </ul>
       </div>
 
