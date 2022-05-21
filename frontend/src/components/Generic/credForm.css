@@ -1,5 +1,5 @@
 .form_top_content {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 .field_width {
@@ -38,11 +38,11 @@
 }
 
 .move_login {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
 }
 
 .check_input {
-    font-size: 13px;
+    font-size: 12px;
     margin-top: -4px;
 }
 

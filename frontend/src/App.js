@@ -2,8 +2,13 @@ import './App.css';
 import { Navbar } from './components/Navbar';
 import { SideNavbar } from './components/SideNavbar';
 import SignUpForm from './components/Signup';
-import Dashboard from './components/Dashboard'
 import LoginForm from './components/Login';
+
+import OrgSignUpForm from './components/OrgSignup';
+import OrgLoginForm from './components/OrgLogin';
+
+
+import Dashboard from './components/Dashboard'
 import Events from "./components/Events"
 import UserProfile from "./components/UserProfile"
 import Invitations from "./components/invitations"
@@ -37,6 +42,12 @@ function App() {
 
         <Route exact path="/signup" element={< SignUpForm />} />
         <Route exact path="/login" element={<LoginForm />} />
+
+
+        <Route exact path="/organization/signup" element={< OrgSignUpForm />} />
+        <Route exact path="/organization/login" element={<OrgLoginForm />} />
+
+
         <Route exact path="/userprofile" element={<UserProfile />} />
         <Route exact path="/orgprofile" element={<OrgProfile />} />
         <Route exact path="/loginorgprofile" element={<LoginOrgProfile />} />
@@ -77,7 +88,7 @@ function App() {
             // </ProtectedRoute> 
           }
           />
-           <Route exact path="organizations" element={
+          <Route exact path="organizations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Organization />
             // </ProtectedRoute> 
@@ -95,14 +106,14 @@ function App() {
             // </ProtectedRoute> 
           }
           />
-           <Route exact path="invitations" element={
+          <Route exact path="invitations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Invitations />
             // </ProtectedRoute> 
           }
           />
 
-      
+
 
         </Route>
       </Routes>

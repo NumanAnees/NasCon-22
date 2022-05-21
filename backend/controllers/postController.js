@@ -26,6 +26,7 @@ const Post=require( "../models/postModel" );
 const multerStorage = multer.memoryStorage();
 
 const multerFilter=( req, file, cb ) => {
+  console.log( "=>>>", file )
     if ( file.mimetype.startsWith( 'image' ) ) {
         // console.log("=>>>>", file );
         req.file=file;
@@ -47,7 +48,9 @@ const upload = multer( {
 
 exports.uploadPostPhoto=upload.single( 'images' )
 
-exports.resizePostPhoto = ( req, res, next ) => {
+exports.resizePostPhoto=( req, res, next ) => {
+
+    // console.log(req.file)
     if ( !req.file ) return next();
 
     req.file.filename=`user-${req.user._id}-${Date.now()}.jpeg`;
@@ -75,7 +78,6 @@ exports.createPost=catchAsync( async ( req, res, next ) => {
  
   console.log("hi")
   const obj={
-    title: req.body.title,
     description: req.body.description,
     veteran: req.user._id,
     file:req.file.filename,

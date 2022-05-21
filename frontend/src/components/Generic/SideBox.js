@@ -12,9 +12,7 @@ const SideBox=( props ) => {
           <img src={require( "./../../img/Group 615.png" )} className="img-fluid pop_img" alt='popImg' />
         </div>
       </div>
-      <p className="footer_text text-center">
-        Powered by ATILAX
-      </p>
+
     </div>
 
   )
