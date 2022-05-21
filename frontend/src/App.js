@@ -17,6 +17,7 @@ import {
 import "antd/dist/antd.css";
 import Landing from "./components/LandingPage/Landing";
 import Profile from './components/Profile';
+import Organization from './components/Organization';
 
 
 function App() {
@@ -67,6 +68,12 @@ function App() {
           <Route exact path="settings" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Profile />
+            // </ProtectedRoute> 
+          }
+          />
+           <Route exact path="organizations" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <Organization />
             // </ProtectedRoute> 
           }
           />
