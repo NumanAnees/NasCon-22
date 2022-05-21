@@ -52,6 +52,14 @@ export const SideNavbar=( props ) => {
               </Link>
             </li>
           }
+          {
+            <li>
+              <Link to='/dashboard/invitations' className={`nav-link  ${location.pathname.includes( "invitations" )? "side_bar_active":'side_bar_link'}`}>
+                <span className='side_bar_icon'> <PeopleIcon /> </span>
+                Invitations
+              </Link>
+            </li>
+          }
         </ul>
       </div>
 

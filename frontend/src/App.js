@@ -9,10 +9,11 @@ import OrgLoginForm from './components/OrgLogin';
 
 
 import Dashboard from './components/Dashboard'
+import Events from "./components/Events"
 import UserProfile from "./components/UserProfile"
-
-
+import Invitations from "./components/invitations"
 import { Link, Outlet } from 'react-router-dom'
+import LoginOrgProfile from "./components/LoginOrgProfile"
 
 
 // import ProtectedRoute from './components/ProtectedRoute.js';
@@ -25,6 +26,7 @@ import Landing from "./components/LandingPage/Landing";
 import Profile from './components/Profile';
 import Organization from './components/Organization';
 import People from './components/People';
+import OrgProfile from './components/OrgProfile';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
 
 
         <Route exact path="/userprofile" element={<UserProfile />} />
+        <Route exact path="/orgprofile" element={<OrgProfile />} />
+        <Route exact path="/loginorgprofile" element={<LoginOrgProfile />} />
 
 
 
@@ -84,7 +88,7 @@ function App() {
             // </ProtectedRoute> 
           }
           />
-           <Route exact path="organizations" element={
+          <Route exact path="organizations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Organization />
             // </ProtectedRoute> 
@@ -96,9 +100,18 @@ function App() {
             // </ProtectedRoute> 
           }
           />
-
-
-
+          <Route exact path="events" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <Events />
+            // </ProtectedRoute> 
+          }
+          />
+          <Route exact path="invitations" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <Invitations />
+            // </ProtectedRoute> 
+          }
+          />
 
 
 
