@@ -8,6 +8,9 @@ import Share from "../share/share";
 import "./feed.css";
 import { Posts } from "../../dummyData";
 import { useGetFollowedPostsQuery } from "../../services/nodeAPI";
+import LeftBarEvents from "../LeftBarEvents/LeftBarEvents"
+import { PageHeader } from '../PageHeader';
+
 
 const Dashboard=() => {
 
@@ -20,8 +23,8 @@ const Dashboard=() => {
     <>
       <div className=" px-3 pe-4 pt-3">
         <div className="feed row">
-      <div className="feedWrapper col-md-8">
-        <Share />
+          <div className="feedWrapper col-md-8">
+            <Share />
             {/* {Posts.map((p) => (
           <Post key={p.id} post={p} />
         ))} */}
@@ -36,18 +39,19 @@ const Dashboard=() => {
 
 
 
-              } ) 
+              } )
 
 
 
             }
 
 
-      </div>
-      <div className="col-md-4"> 
-
-      </div>
-    </div>
+          </div>
+          <div className="col-md-4">
+            <h4>Upcoming Events</h4>
+            <LeftBarEvents />
+          </div>
+        </div>
       </div>
     </>
   );

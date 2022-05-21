@@ -30,6 +30,7 @@ import People from './components/People';
 import OrgProfile from './components/OrgProfile';
 import Veteran from './components/Veteran';
 
+import AddNewEvent from './components/AddNewEvent/AddNewEvent';
 
 function App() {
 
@@ -125,6 +126,13 @@ function App() {
           <Route exact path="community" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <OrgProfile />
+            // </ProtectedRoute> 
+          }
+          />
+
+          <Route exact path="addnewevent" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <AddNewEvent />
             // </ProtectedRoute> 
           }
           />

@@ -1,6 +1,9 @@
 import React from 'react'
 import user from "../img/even.jpg"
 import "../css/eventprofile.css"
+import { Button } from 'antd';
+import MessageIcon from '@mui/icons-material/Message';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Divider } from 'antd';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUserCircleOutlined';
@@ -13,7 +16,7 @@ const Event = () => {
     <div className="col-md-4">
         <img src={user} alt="user" className="profile-image" />   
      <Divider orientation="mid" plain>
-            hobbies
+             Invite People
       </Divider>
       <LeftBar/>
           
@@ -25,6 +28,9 @@ const Event = () => {
 
         <div>
           <p className='lorem'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate tenetur itaque similique optio soluta! Doloribus iste sed odit quod incidunt earum! Quam beatae eligendi dignissimos quis voluptatem impedit! Ducimus, tenetur?</p>
+          <Button type="primary" shape="round" icon={<PersonAddIcon  size="large"/>}>
+      <span className='follow'>Join</span>
+      </Button>
         </div>
       {/* <div className='d-flex mt-4'>
     <Button type="primary" shape="round" icon={<PersonAddIcon  size="large"/>}>

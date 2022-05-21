@@ -49,6 +49,57 @@ export const Users = [
     profilePicture: "assets/person/10.jpeg",
     username: "Safak Kocaoglu",
   },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+
 ];
 
 export const Posts = [

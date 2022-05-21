@@ -150,6 +150,18 @@ export const nodeAPI=createApi( {
       } ),
       providesTags: [ 'Post' ],
     } ),
+    createEvent: builder.mutation( {
+      query: ( body ) => ( {
+        url: '/events/',
+        method: 'POST',
+        body,
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Post' ],
+    } ),
+
 
 
     //Optimize:  ************************** Roles and permission ******************************
@@ -168,7 +180,7 @@ export const nodeAPI=createApi( {
     } ),
 
 
-    
+
     // deleteCandidate: builder.mutation( {
     //   query: ( id ) => ( {
     //     url: '/candidate/delete-candidate',
@@ -182,12 +194,12 @@ export const nodeAPI=createApi( {
     //   } ),
     //   invalidatesTags: [ 'Candidate' ]
     // } ),
-    
+
 
 
   } )
 
 } );
 
-export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation, useGetFollowedPostsQuery, useGetAllVeteransQuery, useGetSingleVeteranQuery, useFollowPersonMutation, useGetcommunitiesQuery, useGetSingleCommunityQuery }=nodeAPI;
+export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation, useGetFollowedPostsQuery, useGetAllVeteransQuery, useGetSingleVeteranQuery, useFollowPersonMutation, useGetcommunitiesQuery, useGetSingleCommunityQuery, useCreateEventMutation }=nodeAPI;
 

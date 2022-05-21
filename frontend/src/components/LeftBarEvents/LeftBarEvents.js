@@ -1,13 +1,13 @@
-import "./LeftBar.css";
+import "./LeftBarEvents.css";
 import { Users } from "../../dummyData";
-import LeftPeople from "../LeftPeople/LeftPeople"
+import LeftEvents from "../LeftEvents/LeftEvents"
 export default function LeftBar() {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <ul className="sidebarFriendList">
           {Users.map((u) => (
-            <LeftPeople key={u.id} user={u} />
+            <LeftEvents key={u.id} user={u} />
           ))}
         </ul>
       </div>
