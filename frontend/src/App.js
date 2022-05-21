@@ -28,7 +28,7 @@ import Profile from './components/Profile';
 import Organization from './components/Organization';
 import People from './components/People';
 import OrgProfile from './components/OrgProfile';
-
+import AddNewEvent from './components/AddNewEvent/AddNewEvent';
 
 function App() {
 
@@ -112,6 +112,13 @@ function App() {
           <Route exact path="invitations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Invitations />
+            // </ProtectedRoute> 
+          }
+          />
+
+          <Route exact path="addnewevent" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <AddNewEvent/>
             // </ProtectedRoute> 
           }
           />

@@ -77,6 +77,19 @@ export const nodeAPI=createApi( {
       invalidatesTags: [ 'Post' ],
     } ),
 
+    //********** create event query
+    createEvent: builder.mutation( {
+      query: ( body ) => ( {
+        url: '/events/',
+        method: 'POST',
+        body,
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      invalidatesTags: [ 'Post' ],
+    } ),
+
 
     //Optimize:  ************************** Roles and permission ******************************
     //******** Get All roles query
@@ -115,5 +128,5 @@ export const nodeAPI=createApi( {
 
 } );
 
-export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation }=nodeAPI;
+export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation,useCreateEventMutation }=nodeAPI;
 
