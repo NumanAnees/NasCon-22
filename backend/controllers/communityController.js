@@ -1,5 +1,4 @@
 const Community=require( "../models/communityModel" );
-const Veteran=require( "../models/veteranModel" );
 const catchAsync=require( "../utils/catchAysnc" );
 const AppError=require( "../utils/appError" );
 const factory=require( './FactoryHandler' );
