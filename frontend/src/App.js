@@ -28,6 +28,7 @@ import Profile from './components/Profile';
 import Organization from './components/Organization';
 import People from './components/People';
 import OrgProfile from './components/OrgProfile';
+import Veteran from './components/Veteran';
 
 
 function App() {
@@ -112,6 +113,18 @@ function App() {
           <Route exact path="invitations" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <Invitations />
+            // </ProtectedRoute> 
+          }
+          />
+          <Route exact path="veteran" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <Veteran />
+            // </ProtectedRoute> 
+          }
+          />
+          <Route exact path="community" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <OrgProfile />
             // </ProtectedRoute> 
           }
           />

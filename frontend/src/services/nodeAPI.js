@@ -37,6 +37,46 @@ export const nodeAPI=createApi( {
       // invalidatesTags: [ 'User' ],
     } ),
 
+    //********** get all veterans
+    getAllVeterans: builder.query( {
+      query: ( body ) => ( {
+        url: '/veterans/',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+
+
+      } ),
+      // invalidatesTags: [ 'User' ],
+    } ),
+    //********** get all veterans
+    getSingleVeteran: builder.query( {
+      query: ( id ) => ( {
+        url: `/veterans/veteranBy/ID/${id}`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+
+
+      } ),
+      // invalidatesTags: [ 'User' ],
+    } ),
+    followPerson: builder.mutation( {
+      query: ( id ) => ( {
+        url: `/veterans/followperson/${id}`,
+        method: 'PATCH',
+        body: {},
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+
+
+      } ),
+      // invalidatesTags: [ 'User' ],
+    } ),
+
     //Optimize:  ************************** Organization/community Authentication ******************************
 
 
@@ -59,9 +99,31 @@ export const nodeAPI=createApi( {
       } ),
       // invalidatesTags: [ 'User' ],
     } ),
+    getcommunities: builder.query( {
+      query: () => ( {
+        url: '/community/',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } )
+
+      // invalidatesTags: [ 'User' ],
+    } ),
+    getSingleCommunity: builder.query( {
+      query: ( id ) => ( {
+        url: `/community/${id}`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } )
+
+      // invalidatesTags: [ 'User' ],
+    } ),
 
 
-    //Optimize:  ************************** Organization/community Authentication ******************************
+    //Optimize:  ************************** post Authentication ******************************
 
 
     //********** create post query
@@ -75,6 +137,18 @@ export const nodeAPI=createApi( {
         }
       } ),
       invalidatesTags: [ 'Post' ],
+    } ),
+
+    //********** create post query
+    getFollowedPosts: builder.query( {
+      query: ( body ) => ( {
+        url: '/veterans/post/followed/',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Post' ],
     } ),
 
 
@@ -115,5 +189,5 @@ export const nodeAPI=createApi( {
 
 } );
 
-export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation }=nodeAPI;
+export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation, useGetFollowedPostsQuery, useGetAllVeteransQuery, useGetSingleVeteranQuery, useFollowPersonMutation, useGetcommunitiesQuery, useGetSingleCommunityQuery }=nodeAPI;
 

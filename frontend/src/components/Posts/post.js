@@ -5,7 +5,7 @@ import { Users } from "../../dummyData";
 import { useState } from "react";
 import PostPic from "./background.jpg"
 
-export default function Post({ post }) {
+export default function Post( { post, name } ) {
 
 
   return (
@@ -20,20 +20,20 @@ export default function Post({ post }) {
               alt=""
             />
             <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
+              {post.name}
             </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{"Few minutes ago"}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
           </div>
         </div>
         <div className="postCenter">
-          <span className="postText">{post?.desc}</span>
-          <img className="postImg " 
-          // src={post.photo}
-          src={PostPic}
-           alt="" />
+          <span className="postText">{post.description}</span>
+          <img className="postImg"
+            // src={post.photo}
+            src={post.file}
+            alt="" />
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ const {
     deleteMe,
     updateVeteran, // For admins
     createVeteran,
+    getVeteranByID,
     updateVeteranPass, // For adVeteran
     // uploadUserPhoto,
     // resizeUserPhoto,
@@ -50,6 +51,8 @@ veteranRouter.post('/matchinghobbies/',vetrensWithMatchingHobbies);
 veteranRouter.patch( '/followperson/:id', FollowPerson );
 veteranRouter.patch( '/interestedevent/:id', interestedInEvent );
 veteranRouter.get( '/post/followed/', getPostOfVeteranFollowed);
+veteranRouter.get( '/', getAllVeterans );
+veteranRouter.get( '/veteranBy/ID/:id', getVeteranByID );
 
 
 

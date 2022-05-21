@@ -9,6 +9,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUserCircleOutlined';
+import { useGetSingleCommunityQuery } from '../services/nodeAPI';
 const OrgProfile = () => {
     const columns = [
   {
@@ -40,19 +41,24 @@ const OrgProfile = () => {
       </Space>
     ),
   },
-];
+    ];
 
-const data = [];
-for (let i = 0; i < 5; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    time: "13 july 2020",
-    eventType: `London Park`,
-    stars: "⭐ 2200",
 
-  });
-}
+  const { data: queryData, isLoading, isError }=useGetSingleCommunityQuery( localStorage.getItem( 'communityID' ) );
+
+  let data;
+
+  console.log( !isLoading&&queryData )
+// for (let i = 0; i < 5; i++) {
+//   data.push({
+//     key: i,
+//     name: `Edward King ${i}`,
+//     time: "13 july 2020",
+//     eventType: `London Park`,
+//     stars: "⭐ 2200",
+
+//   });
+// }
   return (
     <>
     <div className='row top-marg ml-4'>

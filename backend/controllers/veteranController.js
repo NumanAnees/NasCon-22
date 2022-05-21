@@ -65,9 +65,6 @@ exports.getAllVeterans=catchAsync( async ( req, res, next ) => {
     let docs=await Veteran.find();
 
 
-
-
-
     // ! SENDING THE REPONSE
     res.status( 200 ).json( {
         status: 'success',
@@ -78,6 +75,20 @@ exports.getAllVeterans=catchAsync( async ( req, res, next ) => {
 
 // FIX: get single users basaed on id
 exports.getVeteran=factory.getOne( User ,"interestedEvents invitations");
+
+exports.getVeteranByID=catchAsync( async ( req, res, next ) => {
+
+
+    const data=await Veteran.findById( req.params.id );
+
+    res.status( 200 ).json( {
+        status: 'success',
+        data
+    } );
+
+
+
+} )
 
 // FIX: get current user followed persons
 exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {

@@ -1,23 +1,38 @@
 import { useState,useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/Organization.css"
+import { useGetcommunitiesQuery } from '../services/nodeAPI';
 import org from "./card"
-const Organization = () => {
+const Organization=() => {
+
+
+  const { data, isLoading, isError }=useGetcommunitiesQuery();
+
+  console.log( !isLoading&&data.data )
+
+
      const  [query,setQuery] = useState("");
 
-      const CardAdv=() => {
-    return org.filter( ( i ) => i.Specialization.toUpperCase().includes( query ) ).map( ( l, i ) => (
+  const CardAdv=( org ) => {
+    return org?.filter( ( i ) => i.name.toUpperCase().includes( query ) ).map( ( l, i ) => (
       <div key={i} className='col-md-4'>
         <div style={{ "padding": "1rem" }}>
           <div className="card" style={{ "width": "18rem" }}>
             <img className="card-img-top" src={require( './../img/org.png' )} style={{ "height": "180px", "width":"100%" }} alt="Card image cap" />
             <div className="card-body">
-              <h5 className="card-title"><span>Dr. </span>{l.name}</h5>
-              <p className="card-text" style={{ "marginTop": "0.6rem" }}>Speciality in <span style={{ "color": "#0d6efd" }}>{l.speciality}</span></p>
+              <h5 className="card-title">{l.name}</h5>
+              <p className="card-text" style={{ "marginTop": "0.6rem" }}>Type:<span style={{ "color": "#0d6efd" }}>{l.type}</span></p>
               {/* <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
               <div className='text-center'>
 
-                <Link to={`/details/${l.id}`} className="btn btn-primary" style={{ "backgroundColor": "#0d6efd", "borderColor": "#0d6efd" }}>View Details</Link>
+
+                <Link to={`/dashboard/community`} >
+                  <button className="btn btn-primary" style={{ "backgroundColor": "#0d6efd", "borderColor": "#0d6efd" }} onClick={() => { localStorage.setItem( "communityID", l._id ) }}>
+                    View Details
+
+                  </button>
+                </Link>
+
 
               </div>
             </div>
@@ -44,7 +59,7 @@ const Organization = () => {
       </div>
       <div className="container">
         <div className="row">
-          {CardAdv()}
+          {!isLoading&&CardAdv( data?.data.data )}
         </div>
       </div>
     </div>
