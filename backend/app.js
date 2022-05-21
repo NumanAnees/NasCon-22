@@ -15,6 +15,11 @@ const AppError=require( './utils/appError' );
 const globalErrorHandler=require( './controllers/errorController' );
 const communityRouter=require('./routes/communityRouter');
 const evetnRouter=require('./routes/eventRouter');
+const veteranRouter=require( './routes/veteranRouter' );
+const postRouter=require( './routes/postRouter' );
+
+
+
 
 const app=express();
 app.use( cors() )
@@ -77,6 +82,9 @@ app.use( xss() ) //clean  malicious html code from user input
 // app.use( '/api/v1/users', userRouter );
 app.use( '/api/v1/community', communityRouter );
 app.use( '/api/v1/events', evetnRouter );
+app.use( '/api/v1/veterans', veteranRouter );
+app.use( '/api/v1/posts', postRouter );
+
 
 
 

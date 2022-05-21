@@ -6,6 +6,9 @@ const jwt=require( 'jsonwebtoken' );
 const Community =require("../models/communityModel");
 const catchAsync=require( "../utils/catchAysnc" );
 const AppError=require( "../utils/appError" );
+const Veteran=require( "../models/veteranModel" );
+
+
 
 //Todo:  ************************** helper functuions ******************************
 
@@ -95,6 +98,59 @@ exports.logInCommunity=catchAsync( async ( req, res, next ) => {
 } )
 
 
+// FIX: Signig up the vateran 
+exports.signUpVeteran=catchAsync( async ( req, res, next ) => {
+    const newVeteran=await User.create( {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm,
+        profession: req.body.profession,
+        phone: req.body.phone||"",
+        hobbies: req.body.hobbies,
+    } );
+
+    const newUser=await Veteran.create( req.body );
+
+    createTokenSendResponse( 201, newVeteran, res );
+
+
+} );
+
+
+
+// FIX: Logging in the vateran 
+exports.logInVeteran=catchAsync( async ( req, res, next ) => {
+
+    const {
+        email,
+        password
+    }=req.body;
+    console.log( req.body )
+
+
+    //? (1) Checking if user inputed email or password
+    if ( !email||!password ) {
+        return next( new AppError( "Please provide email or password!", 400 ) );
+    }
+
+    const user=await Veteran.findOne( {
+        email,
+        active: true
+    } ).select( '+password' );
+
+    //? (3) Checking if user is a valid user
+    if ( !user||!( await user.correctPassword( password, user.password ) ) ) {
+        return next( new AppError( "Incorrect email or password!", 401 ) );
+    }
+
+    createTokenSendResponse( 200, user, res, req );
+
+} )
+
+
+
 // FIX: Logging in the user 
 exports.logout=catchAsync( async ( req, res, next ) => {
 
@@ -142,11 +198,11 @@ exports.protect=catchAsync( async ( req, res, next ) => {
     //? (3) check if user still exists
     const currentCommunity=await Community.findById( decode.id );
     //TODO:Complete this at the time of integration
-    // const currentVeteran=await Veteran.findById( decode.id );
+    const currentVeteran=await Veteran.findById( decode.id );
     
     
-    // if ( !currentCommunity && !currentVeteran ) {
-    if ( !currentCommunity ) {
+    if ( !currentCommunity&&!currentVeteran ) {
+    // if ( !currentCommunity ) {
         return next( new AppError( "The user belong to this token does no longer exist!, You need to sign up or log in again", 401 ) )
     }
 
