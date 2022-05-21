@@ -21,14 +21,15 @@ const veteranSchema=new mongoose.Schema( {
         required: [ true, "Enter last name!" ],
         trim: true
     },
-    gender:{
-        type:String,
-        enum:['male',"female"],
-        required:[true,"Please enter your gender"]
+    gender: {
+        type: String,
+        enum: [ 'male', "female" ],
+
+
     },
-    address:{
-        type:String,
-        required:[true,"Please enter your address"]
+    address: {
+        type: String,
+        required: [ true, "Please enter your address" ]
     },
     email: { // Identifying users by email
         type: String,
@@ -64,28 +65,28 @@ const veteranSchema=new mongoose.Schema( {
         }
     },
 
-    hobbies: [{
+    hobbies: [ {
         type: String,
-        enum:["Reading","Traveling","Fishing","Crafting","Television","Bird Watching","Collecting","Music","Gardening","Video Games"],
-        required:[true,"Please add some hobbies!"]
-    }],
+        enum: [ "reading", "traveling", "fishing", "crafting", "television", "bird watching", "collecting", "music", "gardening", "video games" ],
+        required: [ true, "Please add some hobbies!" ]
+    } ],
 
     profession: {
         type: String,
-        required:[true,"Please enter your profession!"]
+        required: [ true, "Please enter your profession!" ]
     },
-    followed: [{
-        type: mongoose.Schema.ObjectId,  
-    }],
+    followed: [ {
+        type: mongoose.Schema.ObjectId,
+    } ],
     stars: {
         type: Number,
         default: 1,
     },
-    interestedEvents: [{
-        type: mongoose.Schema.ObjectId,  
-        ref:'Event'
+    interestedEvents: [ {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Event'
     } ],
-   
+
 
     // changePasswordAt: Date,
 
@@ -95,36 +96,36 @@ const veteranSchema=new mongoose.Schema( {
 
 
 
-} ,
-{
-    // TO SEE VIRTUAL FIELDS 
-    toJSON: {
-        virtuals: true
-    },
-    toObject: {
-        virtuals: true
-    },
+},
+    {
+        // TO SEE VIRTUAL FIELDS 
+        toJSON: {
+            virtuals: true
+        },
+        toObject: {
+            virtuals: true
+        },
 
-});
+    } );
 
 
 
-veteranSchema.virtual( 'Posts',{
-    ref:"Post",
-    localField:"_id",
-    foreignField:"veteran"
+veteranSchema.virtual( 'Posts', {
+    ref: "Post",
+    localField: "_id",
+    foreignField: "veteran"
 } )
 
-veteranSchema.virtual( 'createdEvents',{
-    ref:"Event",
-    localField:"_id",
-    foreignField:"veteranID"
+veteranSchema.virtual( 'createdEvents', {
+    ref: "Event",
+    localField: "_id",
+    foreignField: "veteranID"
 } )
 
-veteranSchema.virtual( 'invitations',{
-    ref:"Invitation",
-    localField:"_id",
-    foreignField:"veteranID"
+veteranSchema.virtual( 'invitations', {
+    ref: "Invitation",
+    localField: "_id",
+    foreignField: "veteranID"
 } )
 
 
@@ -133,15 +134,15 @@ veteranSchema.virtual( 'invitations',{
 //Todo: ************************** Adding virtual properties ******************************
 // ***** Whatever return will be set to virtual property value
 veteranSchema.virtual( 'badge' ).get( function () {
-    
+
     if ( this.stars>=25000 ) { return 'Silver' }
-    else if ( this.stars>=40000 ){return "Ruby"}
-    else if ( this.stars>=50000 ){return "Golden"}
-    else if ( this.stars>=60000 ){return "Diamond"}
-    else if ( this.stars>=65000 ){return "Sapphire"}
-    else if ( this.stars>=70000 ){return "Platinum"}
+    else if ( this.stars>=40000 ) { return "Ruby" }
+    else if ( this.stars>=50000 ) { return "Golden" }
+    else if ( this.stars>=60000 ) { return "Diamond" }
+    else if ( this.stars>=65000 ) { return "Sapphire" }
+    else if ( this.stars>=70000 ) { return "Platinum" }
     else if ( this.stars>=100000 ) { return "Eternal" }
-    
+
 
 
 } )
@@ -160,9 +161,9 @@ veteranSchema.pre( 'save', async function ( next ) {
 } )
 
 veteranSchema.pre( /^find/, function ( next ) {
-    
-  this.populate({path:"Posts"})
-  next()
+
+    this.populate( { path: "Posts" } )
+    next()
 } )
 
 // veteranSchema.pre( /^find/, function ( next ) {

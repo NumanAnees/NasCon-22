@@ -2,8 +2,13 @@ import './App.css';
 import { Navbar } from './components/Navbar';
 import { SideNavbar } from './components/SideNavbar';
 import SignUpForm from './components/Signup';
-import Dashboard from './components/Dashboard'
 import LoginForm from './components/Login';
+
+import OrgSignUpForm from './components/OrgSignup';
+import OrgLoginForm from './components/OrgLogin';
+
+
+import Dashboard from './components/Dashboard'
 import UserProfile from "./components/UserProfile"
 
 
@@ -35,6 +40,12 @@ function App() {
 
         <Route exact path="/signup" element={< SignUpForm />} />
         <Route exact path="/login" element={<LoginForm />} />
+
+
+        <Route exact path="/organization/signup" element={< OrgSignUpForm />} />
+        <Route exact path="/organization/login" element={<OrgLoginForm />} />
+
+
         <Route exact path="/userprofile" element={<UserProfile />} />
 
 

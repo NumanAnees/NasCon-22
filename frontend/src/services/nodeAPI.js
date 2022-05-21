@@ -8,19 +8,19 @@ export const nodeAPI=createApi( {
   baseQuery: fetchBaseQuery( { baseUrl: "http://127.0.0.1:3001/api/v1" } ),
 
   // Entities of API
-  tagTypes: [  "User", "Employee" ],
+  tagTypes: [ "Veteran", "Post" ],
 
 
 
   endpoints: ( builder ) => ( {
 
-    //Optimize:  ************************** Authentication ******************************
+    //Optimize:  ************************** Veterans Authentication ******************************
 
 
     //********** Login query
-    login: builder.mutation( {
+    veteranLogin: builder.mutation( {
       query: ( body ) => ( {
-        url: '/users/login',
+        url: '/veterans/login',
         method: 'POST',
         body,
       } ),
@@ -28,13 +28,53 @@ export const nodeAPI=createApi( {
     } ),
 
     //********** Sign up query
-    signup: builder.mutation( {
+    veteranSignup: builder.mutation( {
       query: ( body ) => ( {
-        url: '/users/signup',
+        url: '/veterans/signup',
         method: 'POST',
         body,
       } ),
       // invalidatesTags: [ 'User' ],
+    } ),
+
+    //Optimize:  ************************** Organization/community Authentication ******************************
+
+
+    //********** Login query
+    communityLogin: builder.mutation( {
+      query: ( body ) => ( {
+        url: '/community/login',
+        method: 'POST',
+        body,
+      } ),
+      // invalidatesTags: [ 'User' ],
+    } ),
+
+    //********** Sign up query
+    communitySignup: builder.mutation( {
+      query: ( body ) => ( {
+        url: '/community/signup',
+        method: 'POST',
+        body,
+      } ),
+      // invalidatesTags: [ 'User' ],
+    } ),
+
+
+    //Optimize:  ************************** Organization/community Authentication ******************************
+
+
+    //********** create post query
+    createPost: builder.mutation( {
+      query: ( body ) => ( {
+        url: '/posts/',
+        method: 'POST',
+        body,
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      invalidatesTags: [ 'Post' ],
     } ),
 
 
@@ -49,7 +89,7 @@ export const nodeAPI=createApi( {
         }
 
       } ),
-      providesTags: [ 'Role' ],
+      // providesTags: [ 'community' ],
 
     } ),
 
@@ -75,5 +115,5 @@ export const nodeAPI=createApi( {
 
 } );
 
-export const { useSignupMutation, useLoginMutation }=nodeAPI;
+export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation }=nodeAPI;
 

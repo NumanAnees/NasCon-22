@@ -100,7 +100,7 @@ exports.logInCommunity=catchAsync( async ( req, res, next ) => {
 
 // FIX: Signig up the vateran 
 exports.signUpVeteran=catchAsync( async ( req, res, next ) => {
-    const newVeteran=await User.create( {
+    const newVeteran=await Veteran.create( {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -109,9 +109,12 @@ exports.signUpVeteran=catchAsync( async ( req, res, next ) => {
         profession: req.body.profession,
         phone: req.body.phone||"",
         hobbies: req.body.hobbies,
+        gender: req.body.gender,
+        address: req.body.address
+
     } );
 
-    const newUser=await Veteran.create( req.body );
+    // const newUser=await Veteran.create( req.body );
 
     createTokenSendResponse( 201, newVeteran, res );
 
@@ -172,8 +175,8 @@ exports.logout=catchAsync( async ( req, res, next ) => {
 
 //Fix: Protecting the routes and asking user to log in first to excess the resource
 exports.protect=catchAsync( async ( req, res, next ) => {
-    console.log( "Cookies: ", req.cookies )
-    console.log( "Header: ", req.headers )
+    // console.log( "Cookies: ", req.cookies )
+    // console.log( "Header: ", req.headers )
     //? (1) Getting token and check of it's there
     const {
         authorization

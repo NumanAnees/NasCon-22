@@ -7,9 +7,9 @@ import { Form } from 'antd';
 import { VariantType, useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import AppContext from '../../context/appState/AppContext';
-import { useVeteranSignupMutation } from '../../services/nodeAPI';
 import { useNavigate } from 'react-router-dom';
 
+import { useCommunitySignupMutation } from '../../services/nodeAPI';
 import {
   Select,
 } from 'antd';
@@ -17,18 +17,21 @@ import {
 const { Option }=Select;
 
 
+
+
+
 const SignUpForm=() => {
 
   const head="Introducing smart ways to connect Professionals";
   const subHead="VeteranMeet provide smarter way of connecting with professionals, in few easy steps you can find prefessionals with same interest";
 
-  const [ veteranSignup ]=useVeteranSignupMutation();
+  const [ communitySignup ]=useCommunitySignupMutation();
 
   const navigate=useNavigate();
 
   const { enqueueSnackbar }=useSnackbar();
 
-  const [ creds, setCreds ]=useState( { firstName: "", lastName: "", email: "", password: "", passwordConfirm: "", gender: "", address: "" } );
+  const [ creds, setCreds ]=useState( { name: "", email: "", password: "", passwordConfirm: "", phone: "", type: "" } );
   const [ loading, setLoading ]=useState( false );
 
   const formRef=useRef( null )
@@ -40,7 +43,7 @@ const SignUpForm=() => {
 
   //******** SUBMIT Signup FORM 
   const handleSubmit=async ( values ) => {
-
+    console.log( values )
 
     setLoading( true );
 
@@ -54,23 +57,18 @@ const SignUpForm=() => {
     // Submitting form
     else {
 
-      const obj={
-        ...values,
-        hobbies: values.hobbies.toLowerCase().split( ',' )
-      }
-
-      const res=await veteranSignup( obj )
+      const res=await communitySignup( values )
 
       console.log( res );
 
       if ( res.data.status==="success" ) {
         setLoading( false );
         formRef.current.resetFields();
-        setCreds( { firstName: "", lastName: "", email: "", password: "", passwordConfirm: "", gender: "", address: "" } );
+        setCreds( { name: "", email: "", password: "", passwordConfirm: "", phone: "", type: "" } );
         enqueueSnackbar( "Account has been created successfully!", { variant: 'success' } );
 
 
-        setTimeout( () => { navigate( '/login' ) }, 2000 );
+        setTimeout( () => { navigate( '/organization/login' ) }, 2000 );
 
 
       }
@@ -109,7 +107,7 @@ const SignUpForm=() => {
 
           <div className="form_top_content">
 
-            <h1 className="text-center">Create Veteran Account</h1>
+            <h1 className="text-center">Create Community</h1>
             <p className="text-center">Please provide all the required information</p>
 
 
@@ -117,14 +115,15 @@ const SignUpForm=() => {
 
               <div className="col-md-6">
 
-                <InputField name="firstName" label="First Name" type="text" margin="ms-auto" placeholder="Enter first name" rules={[ { required: true, message: 'Please enter firstname!' } ]} onChange={onChange} />
+                <InputField name="name" label="Name" type="text" margin="ms-auto" placeholder="Enter name" rules={[ { required: true, message: 'Please enter name!' } ]} onChange={onChange} />
 
 
               </div>
 
+
               <div className="col-md-6">
 
-                <InputField name="lastName" label="Last Name" type="text" margin="me-auto" placeholder="Enter last name" rules={[ { required: true, message: 'Please enter second name!' } ]} onChange={onChange} />
+                <InputField name="phone" label="Enter phone no" type="phone" margin="me-auto" placeholder="Enter phone no" rules={[ { required: true, message: 'Please enter phone!' } ]} onChange={onChange} />
 
               </div>
 
@@ -134,45 +133,26 @@ const SignUpForm=() => {
                 <InputField name="email" label="Email Address" type="email" margin="ms-auto" placeholder="Enter email address" rules={[ { required: true, message: 'Please enter valid email!', type: 'email' } ]} onChange={onChange} />
 
               </div>
-
-
-              <div className="col-md-6">
-
-                <InputField name="address" label="Address" type="text" margin="me-auto" placeholder="Enter address"
-                  rules={[ { required: true, message: 'Please enter address!' } ]} onChange={onChange} />
-
-              </div>
-
-
-
-
-
-
-              <div className="col-md-6">
-
-                <InputField name="profession" label="Enter Profession" type="text" margin="ms-auto" placeholder="Enter profession" rules={[ { required: true, message: 'Please enter profession!' } ]} onChange={onChange} />
-
-
-              </div>
-
-
               <div className="col-md-6">
 
                 <div className="me-auto" style={{ width: "70%" }}>
-                  <label className="form-label">Gender</label>
+                  <label className="form-label">Type</label>
 
                 </div>
 
                 <Form.Item
-                  name="gender"
+                  name="type"
                   style={{ width: "70%" }}
-                  rules={[ { required: true, message: 'Please select gender!' } ]}
+                  rules={[ { required: true, message: 'Please select type!' } ]}
                 >
-                  <Select placeholder="select your gender">
-                    <Option value="male">Male</Option>
-                    <Option value="female">Female</Option>
 
+                  <Select placeholder="select type of community">
+                    <Option value="organization">Organization</Option>
+                    <Option value="education institue">Education Institue</Option>
+                    <Option value="NGO">NGO</Option>
                   </Select>
+
+
                 </Form.Item>
 
 
@@ -180,27 +160,15 @@ const SignUpForm=() => {
 
 
 
-              <div className="col-md-6">
-
-                <InputField name="hobbies" label="Enter Hobbies" type="text" margin="ms-auto" placeholder="Enter hobbies" rules={[ { required: true, message: 'Please enter hobbies!' } ]} onChange={onChange} />
 
 
+
+              <div className="col-md-12">
+                <InputField name="password" label="Password" type="password" margin="mx-auto" placeholder="Enter password" rules={[ { required: true, message: 'Please enter password!' } ]} onChange={onChange} />
               </div>
 
-              <div className="col-md-6">
-
-                <InputField name="phone" label="Enter Phone no" type="text" margin="me-auto" placeholder="Enter phone" rules={[ { required: true, message: 'Please enter phone!' } ]} onChange={onChange} />
-
-
-              </div>
-
-
-              <div className="col-md-6">
-                <InputField name="password" label="Password" type="password" margin="ms-auto" placeholder="Enter password" rules={[ { required: true, message: 'Please enter password!' } ]} onChange={onChange} />
-              </div>
-
-              <div className="col-md-6" >
-                <InputField name="passwordConfirm" label="Confirm Password" type="password" margin="me-auto" onChange={onChange} placeholder="Confirm your password" rules={[ { required: true, message: 'Confirm your password!' }, ( { getFieldValue } ) => ( {
+              <div className="col-md-12" >
+                <InputField name="passwordConfirm" label="Confirm Password" type="password" margin="mx-auto" onChange={onChange} placeholder="Confirm your password" rules={[ { required: true, message: 'Confirm your password!' }, ( { getFieldValue } ) => ( {
                   validator( _, value ) {
                     if ( !value||getFieldValue( 'password' )===value ) {
                       return Promise.resolve();
@@ -212,9 +180,6 @@ const SignUpForm=() => {
 
 
               </div>
-
-
-
 
 
 
@@ -254,13 +219,13 @@ const SignUpForm=() => {
 
         <div className="move_login text-center">
           <p>
-            Already have an vateran account?
-            <Link to="/login" className="ms-2 inline_link">Login</Link>
+            Already have an community?
+            <Link to="/organization/login" className="ms-2 inline_link">Login</Link>
           </p>
 
           <p>
-            Go to organization account
-            <Link to="/organization/login" className="ms-2 inline_link">Login</Link>
+            Login to Veteran account
+            <Link to="/login" className="ms-2 inline_link">Login</Link>
           </p>
 
 
