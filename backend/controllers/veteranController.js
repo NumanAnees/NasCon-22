@@ -165,14 +165,26 @@ exports.vetrensWithMatchingHobbies=catchAsync( async ( req, res, next ) => {
 } );
 
 
+function shuffle1(arr) {
+    return Array(arr.length).fill(null)
+        .map((_, i) => [Math.random(), i])
+        .sort(([a], [b]) => a - b)
+        .map(([, i]) => arr[i])
+}
+
+
 //Get the post of all the veteran followed
 exports.getPostOfVeteranFollowed=catchAsync( async ( req, res, next ) => {
     const followedPeople=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
     let persons;
    posts= followedPeople.map( async (el) => {
-       return (await Veteran.findById( el ).select("Posts")).Posts; 
+      
+    let obj=(await Veteran.findById( el ).select("Posts firstName lastName"));
+
+       return {firstName:obj.firstName,lastName:obj.lastName,Posts:obj.Posts}; 
    } )
     let data=await Promise.all(posts)
+    data=shuffle1(data.flat())
     res.status( 200 ).json( {
         status: 'success',
         data
