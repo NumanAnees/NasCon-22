@@ -84,20 +84,8 @@ const veteranSchema=new mongoose.Schema( {
     interestedEvents: [{
         type: mongoose.Schema.ObjectId,  
         ref:'Event'
-
     } ],
    
-    invitations:{
-        type: mongoose.Schema.ObjectId,  
-        ref:'Event'        
-    }
-
-
-
-
-
-
-
 
     // changePasswordAt: Date,
 
@@ -129,6 +117,12 @@ veteranSchema.virtual( 'Posts',{
 
 veteranSchema.virtual( 'createdEvents',{
     ref:"Event",
+    localField:"_id",
+    foreignField:"veteranID"
+} )
+
+veteranSchema.virtual( 'invitations',{
+    ref:"Invitation",
     localField:"_id",
     foreignField:"veteranID"
 } )

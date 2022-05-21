@@ -1,4 +1,5 @@
 const Community=require( "../models/communityModel" );
+const Veteran=require( "../models/veteranModel" );
 const catchAsync=require( "../utils/catchAysnc" );
 const AppError=require( "../utils/appError" );
 const factory=require( './FactoryHandler' );
@@ -68,7 +69,7 @@ exports.deleteMe=catchAsync( async ( req, res, next ) => {
 exports.getAllCommunities=catchAsync( async ( req, res, next ) => {
 
     // ! EXECUTE TlHE QUERRY
-    let docs=await Community.find(  { role: "Community" } ).populate({ path: "events" } );
+    let docs=await Community.find().populate({ path: "createdEvents" } );
 
 
     // ! SENDING THE REPONSE
@@ -87,3 +88,6 @@ exports.getCommunity=factory.getOne( Community, { path: "events" } );
 
 // FIX: delete Community based on id (By Admins)
 exports.deleteCommunity=factory.deleteOne( Community );
+
+
+

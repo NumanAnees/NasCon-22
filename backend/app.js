@@ -17,6 +17,7 @@ const communityRouter=require('./routes/communityRouter');
 const evetnRouter=require('./routes/eventRouter');
 const veteranRouter=require( './routes/veteranRouter' );
 const postRouter=require( './routes/postRouter' );
+const invitationRouter=require( './routes/invitationRouter' );
 
 
 
@@ -84,6 +85,7 @@ app.use( '/api/v1/community', communityRouter );
 app.use( '/api/v1/events', evetnRouter );
 app.use( '/api/v1/veterans', veteranRouter );
 app.use( '/api/v1/posts', postRouter );
+app.use( '/api/v1/invitations', invitationRouter );
 
 
 

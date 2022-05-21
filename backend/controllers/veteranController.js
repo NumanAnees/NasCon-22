@@ -77,7 +77,7 @@ exports.getAllVeterans=catchAsync( async ( req, res, next ) => {
 } );
 
 // FIX: get single users basaed on id
-exports.getVeteran=factory.getOne( User ,"interestedEvents");
+exports.getVeteran=factory.getOne( User ,"interestedEvents invitations");
 
 // FIX: get current user followed persons
 exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
