@@ -3,10 +3,9 @@ const {
     promisify
 }=require( 'util' );
 const jwt=require( 'jsonwebtoken' );
-const User=require( "../models/userModel" );
+const Community =require("../models/communityModel");
 const catchAsync=require( "../utils/catchAysnc" );
 const AppError=require( "../utils/appError" );
-const sendEmail=require( "../utils/email" );
 
 //Todo:  ************************** helper functuions ******************************
 
@@ -48,20 +47,16 @@ const createTokenSendResponse=( statusCode, user, res, req ) => {
 
 
 // FIX: Signig up the user 
-exports.signUp=catchAsync( async ( req, res, next ) => {
-    const newUser=await User.create( {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+exports.signUpCommunity=catchAsync( async ( req, res, next ) => {
+    const newUser=await Community.create( {
+        name: req.body.name,
+        type: req.body.type,
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
-        role: req.body.role||"user",
-        // CNIC: req.body.CNIC
-        // role: req.body.role||"admin",
-        // photo: req.body.photo
+        phone:req.body.phone,
     } );
 
-    // const newUser = await User.create( req.body );
 
     createTokenSendResponse( 201, newUser, res );
 
@@ -71,7 +66,7 @@ exports.signUp=catchAsync( async ( req, res, next ) => {
 
 
 // FIX: Logging in the user 
-exports.logIn=catchAsync( async ( req, res, next ) => {
+exports.logInCommunity=catchAsync( async ( req, res, next ) => {
 
     const {
         email,
@@ -85,7 +80,7 @@ exports.logIn=catchAsync( async ( req, res, next ) => {
         return next( new AppError( "Please provide email or password!", 400 ) );
     }
 
-    const user=await User.findOne( {
+    const user=await Community.findOne( {
         email,
         active: true
     } ).select( '+password' );
@@ -145,9 +140,13 @@ exports.protect=catchAsync( async ( req, res, next ) => {
 
 
     //? (3) check if user still exists
-    const currentUser=await User.findById( decode.id );
-    console.log( currentUser )
-    if ( !currentUser ) {
+    const currentCommunity=await Community.findById( decode.id );
+    //TODO:Complete this at the time of integration
+    // const currentVeteran=await Veteran.findById( decode.id );
+    
+    
+    // if ( !currentCommunity && !currentVeteran ) {
+    if ( !currentCommunity ) {
         return next( new AppError( "The user belong to this token does no longer exist!, You need to sign up or log in again", 401 ) )
     }
 
@@ -159,7 +158,11 @@ exports.protect=catchAsync( async ( req, res, next ) => {
     // }
 
     // Now user have excess to protected route
-    req.user=currentUser;
+    if(currentCommunity)
+    req.user=currentCommunity;
+    else
+    req.user=currentVeteran;
+    
 
     next();
 } )
