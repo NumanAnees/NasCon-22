@@ -38,8 +38,8 @@ const Organization = () => {
   return (
     <div className='mt-2'>
     <div className='container marg-2'>
-        <div className='row d-flex justify-content-center'>
-          <input type="text" className='form-inp' placeholder='Search Organizations here....' onChange={e => setQuery( e.target.value.toUpperCase() )} />
+        <div className='row d-flex justify-content-center search'>
+          <input type="text" className='form-inp search' placeholder='Search Organizations here....' onChange={e => setQuery( e.target.value.toUpperCase() )} />
         </div>
       </div>
       <div className="container">

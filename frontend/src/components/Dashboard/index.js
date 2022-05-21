@@ -7,6 +7,9 @@ import Post from "../Posts/post";
 import Share from "../share/share";
 import "./feed.css";
 import { Posts } from "../../dummyData";
+import LeftBarEvents from "../LeftBarEvents/LeftBarEvents" 
+import { PageHeader } from '../PageHeader';
+
 
 const Dashboard=() => {
 
@@ -21,9 +24,10 @@ const Dashboard=() => {
         ))}
       </div>
       <div className="col-md-4"> 
-
+          <h4>Upcoming Events</h4>
+          <LeftBarEvents/>
       </div>
-    </div>
+      </div>
       </div>
     </>
   );

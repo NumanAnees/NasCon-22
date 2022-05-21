@@ -2,6 +2,7 @@ import React from 'react'
 import "../css/invitations.css"
 import TableComp from "../components/TableComp/TableComp"
 import {  Space } from 'antd';
+import { PageHeader } from './PageHeader';
 
 
 const invitations = () => {
@@ -54,7 +55,7 @@ for (let i = 0; i < 5; i++) {
     <>
     <div>
         <div>
-            <h2 className='text-center heading-events'>All Invitations</h2>
+    <PageHeader subHeading='You can view all the invites of events here.' heading='All Invitations' />
             <div className="padding-Table">
             <TableComp data={data} columns={columns} />
             </div>
