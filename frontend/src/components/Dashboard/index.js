@@ -13,12 +13,15 @@ const Dashboard=() => {
   return (
     <>
       <div className=" px-3 pe-4 pt-3">
-        <div className="feed">
-      <div className="feedWrapper">
+        <div className="feed row">
+      <div className="feedWrapper col-md-8">
         <Share />
         {Posts.map((p) => (
           <Post key={p.id} post={p} />
         ))}
+      </div>
+      <div className="col-md-4"> 
+
       </div>
     </div>
       </div>

@@ -33,7 +33,6 @@ export default function Post({ post }) {
           <img className="postImg" 
           // src={post.photo}
           src={PostPic}
-          
            alt="" />
         </div>
       </div>
