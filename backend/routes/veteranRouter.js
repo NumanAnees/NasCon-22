@@ -13,7 +13,7 @@ const {
     activeVeteran,
     inactiveVeteran,
     getVeteranFollowedPersons,
-    FollowPerson,
+    FollowPerson,interestedInEvent
 }=require( `../controllers/veteranController` );
 
 
@@ -47,6 +47,7 @@ veteranRouter.use( protect ); // protecting routes
 veteranRouter.get( '/me', getVeteran )
 veteranRouter.get( '/current/getfollowedpersons', getVeteranFollowedPersons )
 veteranRouter.patch( '/followperson/:id', FollowPerson )
+veteranRouter.patch( '/interestedEvent/:id', interestedInEvent )
 
 
 

@@ -23,6 +23,17 @@ const EventSchema=new mongoose.Schema( {
     required: [ true, "Please enter the number of stars for the event!" ],
   
   },
+  location: {
+    type: {
+      type: String, 
+      enum: ['Point'],
+      default:"Point"
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
   communityID:{ 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Community'
@@ -32,8 +43,9 @@ const EventSchema=new mongoose.Schema( {
     ref: 'Veteran'  
   }
 
+},
 
-}, {
+{
   // TO SEE VIRTUAL FIELDS 
   toJSON: {
     virtuals: true

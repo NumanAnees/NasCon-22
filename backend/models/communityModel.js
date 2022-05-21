@@ -64,7 +64,7 @@ const communitySchema=new mongoose.Schema( {
 
 
 
-communitySchema.virtual( 'events',{
+communitySchema.virtual( 'createdEvents',{
     ref:"Event",
     localField:"_id",
     foreignField:"communityID"

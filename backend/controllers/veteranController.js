@@ -77,7 +77,7 @@ exports.getAllVeterans=catchAsync( async ( req, res, next ) => {
 } );
 
 // FIX: get single users basaed on id
-exports.getVeteran=factory.getOne( User );
+exports.getVeteran=factory.getOne( User ,"interestedEvents");
 
 // FIX: get current user followed persons
 exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
@@ -118,20 +118,22 @@ exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
 
 // FIX:  followed persons
 exports.FollowPerson=catchAsync( async ( req, res, next ) => {
-
     let followedPeople=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
-  
     followedPeople.push( req.params.id )
     console.log(followedPeople)
-  
     await Veteran.findByIdAndUpdate( req.user._id, { followed: followedPeople } );
-
-
-
     res.status( 200 ).json( {
         status: 'success',
     } );
-
-
-
 } )
+
+
+exports.interestedInEvent=catchAsync( async ( req, res, next ) => {
+    let newInterestedEvents=( await Veteran.findById( req.user._id ).select( 'interestedEvents' ) ).interestedEvents;
+    newInterestedEvents.push( req.params.id )
+    console.log(newInterestedEvents);
+    await Veteran.findByIdAndUpdate( req.user._id, { interestedEvents: newInterestedEvents } );
+    res.status( 200 ).json( {
+        status: 'success',
+    } );
+} );

@@ -22,6 +22,7 @@ const veteranSchema=new mongoose.Schema( {
         trim: true
     },
     gender:{
+        type:String,
         enum:['male',"female"],
         required:[true,"Please enter your gender"]
     },
@@ -41,28 +42,10 @@ const veteranSchema=new mongoose.Schema( {
     phone: {
         type: String,
     },
-    // photo: {
-    //     type: String,
-    //     default: 'default.jpg' 
-    // },
-
     active: {
         type: Boolean,
         default: true
     },
-    // CNIC: {
-    //     type: String,
-    //     required: [ true, "please provide your CNIC" ],
-    //     unique: [ true, "User already exist!" ],
-    //     validate: {
-    //         validator: function ( val ) {
-    //             console.log( ( /^[ 0-9 ]{5}-[ 0-9 ]{7}-[ 0-9 ]$/ ).test( val ) )
-    //             return ( /^[ 0-9 ]{5}-[ 0-9 ]{7}-[ 0-9 ]$/ ).test( val )
-    //         },
-    //         message: "CNIC No must follow the XXXXX-XXXXXXX-X format!"
-    //     }
-    // },
-
     password: {
         type: String,
         required: [ true, 'Please provide your password' ],
@@ -102,7 +85,12 @@ const veteranSchema=new mongoose.Schema( {
         type: mongoose.Schema.ObjectId,  
         ref:'Event'
 
-    } ]
+    } ],
+   
+    invitations:{
+        type: mongoose.Schema.ObjectId,  
+        ref:'Event'        
+    }
 
 
 
@@ -138,6 +126,13 @@ veteranSchema.virtual( 'Posts',{
     localField:"_id",
     foreignField:"veteran"
 } )
+
+veteranSchema.virtual( 'createdEvents',{
+    ref:"Event",
+    localField:"_id",
+    foreignField:"veteranID"
+} )
+
 
 
 

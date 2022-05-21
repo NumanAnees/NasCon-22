@@ -49,3 +49,5 @@ exports.updateEvent=factory.updateOne( Event )
 
 // Optimize: delete  based on id 
 exports.deleteEvent=factory.deleteOne( Event );
+
+// Send Invitation
