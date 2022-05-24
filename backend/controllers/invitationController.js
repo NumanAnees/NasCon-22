@@ -15,7 +15,7 @@ exports.acceptInvitation=catchAsync( async ( req, res, next ) => {
   return next( new AppError( "No invitation found", 404 ) )
   const {eventID,veteranID}=doc;
   let newInterestedEvents=( await Veteran.findById( veteranID ).select( 'interestedEvents' ) ).interestedEvents;
-    newInterestedEvents.push( eventID )
+    newInterestedEvents.push( eventID._id )
     await Veteran.findByIdAndUpdate( veteranID, { interestedEvents: newInterestedEvents } );
 
     await Invitation.deleteById(req.params.id);

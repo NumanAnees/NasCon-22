@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { nodeAPI } from "../services/nodeAPI";
-import employeeReducer from "./employee";
+import userReducer from "./employee";
 
 
 export const store=configureStore( {
         reducer: {
                 // Add the generated reducer as a specific top-level slice
                 [ nodeAPI.reducerPath ]: nodeAPI.reducer,
-                emp: employeeReducer
+                User: userReducer
 
         },
 

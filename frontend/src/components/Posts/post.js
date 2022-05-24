@@ -20,7 +20,7 @@ export default function Post( { post, name } ) {
               alt=""
             />
             <span className="postUsername">
-              {post.name}
+              {name}
             </span>
             <span className="postDate">{"Few minutes ago"}</span>
           </div>

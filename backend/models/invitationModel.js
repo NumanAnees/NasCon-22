@@ -59,7 +59,7 @@ InvitationSchema.pre( 'save', async function ( next ) {
 InvitationSchema.pre( /^find/, async function ( next ) {
   // HERE 'this' keyword === querry Obj
 
-
+   this.populate({path:"eventID"})
 
   next();
 } )

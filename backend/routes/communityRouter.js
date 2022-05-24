@@ -34,7 +34,7 @@ communityRouter.post( '/login', logInCommunity );
 communityRouter.use( protect ); // protecting routes
 // communityRouter.patch( '/updateme', updateMe );
 // communityRouter.delete( '/deleteme', deleteMe );
-// communityRouter.get( '/me', getCommunity )
+communityRouter.get( '/me', getCommunity )
 communityRouter.route( "/:id" )
     .get( getCommunity )
 communityRouter.route( "/" )

@@ -77,7 +77,7 @@ export default function Share() {
             <img className="shareProfileImg" src={User} alt="" />
 
             <input
-              placeholder="What's in your mind Safak?"
+              placeholder="What's in your mind?"
               className="shareInput"
               name="description"
               onChange={onChange}

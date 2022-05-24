@@ -22,7 +22,7 @@ const filterObject=( obj, ...fields ) => {
 }
 
 
-//Optimize:                    ************** Route handler Functions ***************
+//Optimize:  ************** Route handler Functions ***************
 
 
 
@@ -62,7 +62,7 @@ exports.updateMe=catchAsync( async ( req, res, next ) => {
 exports.getAllVeterans=catchAsync( async ( req, res, next ) => {
 
     // ! EXECUTE TlHE QUERRY
-    let docs=await Veteran.find();
+    let docs=await Veteran.find({_id:{$ne:req.user._id}});
 
 
     // ! SENDING THE REPONSE
@@ -79,7 +79,7 @@ exports.getVeteran=factory.getOne( User ,"interestedEvents invitations createdEv
 exports.getVeteranByID=catchAsync( async ( req, res, next ) => {
 
 
-    const data=await Veteran.findById( req.params.id );
+    const data=await Veteran.findById( req.params.id ).populate("createdEvents");
 
     res.status( 200 ).json( {
         status: 'success',
@@ -90,6 +90,18 @@ exports.getVeteranByID=catchAsync( async ( req, res, next ) => {
 
 } )
 
+exports.increaseVeteranStars=catchAsync(async (req,res,next)=>{
+
+   const vetStars=(await Veteran.findById(req.user._id)).stars;
+    const data=await Veteran.findByIdAndUpdate(req.user._id,{stars:vetStars+Number(req.body.stars)},{new:true});
+
+    res.status( 200 ).json( {
+        status: 'success',
+        data
+    } );
+
+})
+
 // FIX: get current user followed persons
 exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
 
@@ -98,7 +110,7 @@ exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
 
     let persons;
     
-    // console.log( followedPeople );
+    console.log( followedPeople );
 
    persons= followedPeople.map( async (el) => {
        return await Veteran.findById( el );
@@ -130,17 +142,34 @@ exports.getVeteranFollowedPersons=catchAsync( async ( req, res, next ) => {
 // FIX:  followed persons
 exports.FollowPerson=catchAsync( async ( req, res, next ) => {
     let followedPeople=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
+    if(followedPeople.indexOf(req.params.id)==-1)
     followedPeople.push( req.params.id )
     console.log(followedPeople)
-    await Veteran.findByIdAndUpdate( req.user._id, { followed: followedPeople } );
+   const data= await Veteran.findByIdAndUpdate( req.user._id, { followed: followedPeople },{new:true} );
     res.status( 200 ).json( {
         status: 'success',
+        data
+    } );
+} )
+
+// FIX:  followed persons
+exports.FollowOrganization=catchAsync( async ( req, res, next ) => {
+    let followedOrganization=( await Veteran.findById( req.user._id ).select( 'followed' ) ).followed;
+    if(followedPeople.indexOf(req.params.id)==-1)
+    followedPeople.push( req.params.id )
+    console.log(followedPeople)
+   const data= await Veteran.findByIdAndUpdate( req.user._id, { followed: followedPeople },{new:true} );
+    res.status( 200 ).json( {
+        status: 'success',
+        data
     } );
 } )
 
 
 exports.interestedInEvent=catchAsync( async ( req, res, next ) => {
-    let newInterestedEvents=( await Veteran.findById( req.user._id ).select( 'interestedEvents' ) ).interestedEvents;
+    let newInterestedEvents=( await Veteran.findById( req.user._id ).select( 'interestedEvents' ) )?.interestedEvents;
+    if(!newInterestedEvents)
+    return next(new AppError("Error occured",400))
     newInterestedEvents.push( req.params.id )
     console.log(newInterestedEvents);
     await Veteran.findByIdAndUpdate( req.user._id, { interestedEvents: newInterestedEvents } );
@@ -152,15 +181,10 @@ exports.interestedInEvent=catchAsync( async ( req, res, next ) => {
 //Get all the veterans with matching hobbies
 exports.vetrensWithMatchingHobbies=catchAsync( async ( req, res, next ) => {
     const doc=await Veteran.find();
-    const hobbies=req.body.hobbies;
+    const hobby=req.params.hobby;
 
     const filtered= doc.filter((e)=>{
-        let check =false;
-        hobbies.forEach((el)=>{
-         if(e.hobbies.indexOf(el)!=-1)
-         check=true;
-        })
-        return check;
+        return e.hobbies.indexOf(hobby)!=-1;
     })
 
 

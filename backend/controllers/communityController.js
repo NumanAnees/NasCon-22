@@ -83,7 +83,7 @@ exports.getAllCommunities=catchAsync( async ( req, res, next ) => {
 } );
 
 // FIX: get single Community basaed on id
-exports.getCommunity=factory.getOne( Community );
+exports.getCommunity=factory.getOne( Community,"createdEvents" );
 
 // FIX: delete Community based on id (By Admins)
 exports.deleteCommunity=factory.deleteOne( Community );

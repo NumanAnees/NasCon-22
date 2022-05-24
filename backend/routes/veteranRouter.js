@@ -14,7 +14,7 @@ const {
     activeVeteran,
     inactiveVeteran,
     getVeteranFollowedPersons,
-    FollowPerson,interestedInEvent, vetrensWithMatchingHobbies, getPostOfVeteranFollowed
+    FollowPerson,interestedInEvent, vetrensWithMatchingHobbies, getPostOfVeteranFollowed, increaseVeteranStars
 }=require( `../controllers/veteranController` );
 
 
@@ -47,10 +47,11 @@ veteranRouter.use( protect ); // protecting routes
 // veteranRouter.patch( '/updateMe', uploadUserPhoto, resizeUserPhoto , updateMe );
 veteranRouter.get( '/me', getVeteran );
 veteranRouter.get( '/current/getfollowedpersons', getVeteranFollowedPersons );
-veteranRouter.post('/matchinghobbies/',vetrensWithMatchingHobbies);
+veteranRouter.patch( '/increaseStars', increaseVeteranStars );
+veteranRouter.get( '/post/followed/', getPostOfVeteranFollowed);
+veteranRouter.get('/matchinghobbies/:hobby',vetrensWithMatchingHobbies);
 veteranRouter.patch( '/followperson/:id', FollowPerson );
 veteranRouter.patch( '/interestedevent/:id', interestedInEvent );
-veteranRouter.get( '/post/followed/', getPostOfVeteranFollowed);
 veteranRouter.get( '/', getAllVeterans );
 veteranRouter.get( '/veteranBy/ID/:id', getVeteranByID );
 

@@ -39,7 +39,7 @@ const Landing=() => {
   const cardsContent=[
     {
       img: "img1.png",
-      heading: "Talented Candidates",
+      heading: "Talented Organizations",
       description:
         "Some quick example text to build on the card title and make up the bulk of the card's content",
     },
@@ -71,11 +71,7 @@ const Landing=() => {
             offset={-90}
             duration={500}
           >
-            <img
-              src={require( "./../../img/Group 2.png" )}
-              className="nav_brand_logo"
-              alt="lOGO"
-            />
+           <h2>VateranMEET</h2>
           </Link>
           <button
             className="navbar-toggler"
@@ -164,12 +160,13 @@ const Landing=() => {
         <div className="row">
           <div className="col-md-5 first_col">
             <h2 className="landing_text">
-              <span className="highlight">Meerkat</span> A Smart
+              <span className="highlight">VeteranMeet</span> A Smart
             </h2>
-            <h2 className="landing_text">Recruitment Solution</h2>
+            <h2 className="landing_text">Connection Tool</h2>
             <p className="landing_para">
-              Meerkat provides easy and smart recruitment solutions, by which
-              consultantns can easily hire talented candidates{" "}
+            VeteranMeet is web based solution to connect with veterans and engage them into community
+services based on their interests. A veteran (from Latin vetus, meaning "old") is a person who has
+had long service or experience in a particular occupation or field.
             </p>
             <div>
               <button
@@ -201,23 +198,7 @@ const Landing=() => {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-around logos_card my-5 text-white">
-          <div className="logo">
-            <img src={require( "./../../img/05.png" )} className="" style={{ width: "100%", height: "100%" }} alt="FLEX" />
-          </div>
-          <div className="logo">
-            <img src={require( "./../../img/03.png" )} className="" style={{ width: "100%", height: "100%" }} alt="FLEX" />
-          </div>
-          <div className="logo">
-            <img src={require( "./../../img/01.png" )} className="" style={{ width: "100%", height: "100%" }} alt="FLEX" />
-          </div>
-          <div className="logo">
-            <img src={require( "./../../img/04.png" )} className="" style={{ width: "100%", height: "100%" }} alt="FLEX" />
-          </div>
-          <div className="logo">
-            <img src={require( "./../../img/02.png" )} className="" style={{ width: "100%", height: "100%" }} alt="FLEX" />
-          </div>
-        </div>
+     
       </div>
 
       {
@@ -301,24 +282,7 @@ const Landing=() => {
         </div>
       </div>
 
-      {
-        //************  SLIDER **************
-      }
-
-      {/* <div className="container client_sec" id="about_us">
-        <h2 className="text-center main_head">
-          What our <span className="highlight">clients</span> say!
-        </h2>
-        <p className="para text-center w-75 mx-auto">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo doloresre.
-        </p>
-        <div className="slider">
-          <Slider />
-        </div>
-      </div> */}
-
+      
       {
         //************  CONTACT US **************
       }
@@ -391,7 +355,7 @@ const Landing=() => {
                 <small style={{ marginBottom: "0rem !important" }}>
                   Email Address
                 </small>
-                <p className>Contact@meerkat.com</p>
+                <p className>Contact@veteranMeet.com</p>
               </div>
             </div>
             {/* Grid column */}
@@ -430,7 +394,7 @@ const Landing=() => {
           <div className="container pb-3">
             <div className="row text-center">
               <div className="col-4">
-                <small>Alright reserved © 2022 Atilax</small>
+                <small>Alright reserved © 2022 </small>
               </div>
               <div className="col-4">
                 <small>Any Inquiry ?</small>

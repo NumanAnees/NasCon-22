@@ -8,7 +8,7 @@ export const nodeAPI=createApi( {
   baseQuery: fetchBaseQuery( { baseUrl: "http://127.0.0.1:3001/api/v1" } ),
 
   // Entities of API
-  tagTypes: [ "Veteran", "Post" ],
+  tagTypes: [ "Veteran", "Post","Event","Community" ],
 
 
 
@@ -24,7 +24,7 @@ export const nodeAPI=createApi( {
         method: 'POST',
         body,
       } ),
-      // invalidatesTags: [ 'User' ],
+      invalidatesTags: [ 'Veteran' ],
     } ),
 
     //********** Sign up query
@@ -34,7 +34,7 @@ export const nodeAPI=createApi( {
         method: 'POST',
         body,
       } ),
-      // invalidatesTags: [ 'User' ],
+      invalidatesTags: [ 'Veteran' ],
     } ),
 
     //********** get all veterans
@@ -45,10 +45,8 @@ export const nodeAPI=createApi( {
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
-
-
       } ),
-      // invalidatesTags: [ 'User' ],
+      providesTags: [ 'Veteran' ],
     } ),
     //********** get all veterans
     getSingleVeteran: builder.query( {
@@ -58,10 +56,19 @@ export const nodeAPI=createApi( {
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
-
-
       } ),
-      // invalidatesTags: [ 'User' ],
+      providesTags: [ 'Veteran' ],
+    } ),
+    //********** get veterans
+    getVeteran: builder.query( {
+      query: (  ) => ( {
+        url: `/veterans/me`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Veteran' ],
     } ),
     followPerson: builder.mutation( {
       query: ( id ) => ( {
@@ -71,10 +78,8 @@ export const nodeAPI=createApi( {
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
-
-
       } ),
-      // invalidatesTags: [ 'User' ],
+      invalidatesTags: [ 'Veteran' ],
     } ),
 
     //Optimize:  ************************** Organization/community Authentication ******************************
@@ -87,7 +92,7 @@ export const nodeAPI=createApi( {
         method: 'POST',
         body,
       } ),
-      // invalidatesTags: [ 'User' ],
+      invalidatesTags: [ 'Community' ],
     } ),
 
     //********** Sign up query
@@ -97,7 +102,7 @@ export const nodeAPI=createApi( {
         method: 'POST',
         body,
       } ),
-      // invalidatesTags: [ 'User' ],
+      invalidatesTags: [ 'Community' ],
     } ),
     getcommunities: builder.query( {
       query: () => ( {
@@ -106,9 +111,8 @@ export const nodeAPI=createApi( {
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
-      } )
-
-      // invalidatesTags: [ 'User' ],
+      } ),
+      providesTags: [ 'Community' ],
     } ),
     getSingleCommunity: builder.query( {
       query: ( id ) => ( {
@@ -117,9 +121,8 @@ export const nodeAPI=createApi( {
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
-      } )
-
-      // invalidatesTags: [ 'User' ],
+      } ),
+      providesTags: [ 'Community' ],
     } ),
 
 
@@ -141,7 +144,7 @@ export const nodeAPI=createApi( {
 
     //********** create post query
     getFollowedPosts: builder.query( {
-      query: ( body ) => ( {
+      query: () => ( {
         url: '/veterans/post/followed/',
         method: 'GET',
         headers: {
@@ -150,6 +153,17 @@ export const nodeAPI=createApi( {
       } ),
       providesTags: [ 'Post' ],
     } ),
+    suggestedEvents: builder.query( {
+      query: ( id ) => ( {
+        url: `/events/suggestedEvents/${id}`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Event' ],
+    } ),
+
     createEvent: builder.mutation( {
       query: ( body ) => ( {
         url: '/events/',
@@ -163,43 +177,89 @@ export const nodeAPI=createApi( {
     } ),
 
 
+    getEvent: builder.query( {
+      query: ( id ) => ( {
+        url: `/events/${id}`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Event' ],
+    } ),
+
+
+    sendInvitation: builder.mutation( {
+      query: ( body ) => ( {
+        url: `/invitations/`,
+        method: 'POST',
+        body,
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Event' ],
+    } ),
+
+    getAllEvents: builder.query( {
+      query: () => ( {
+        url: `/events/`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Event' ],
+    } ),
+
+    
+    increaseStars: builder.mutation( {
+      query: (body) => ( {
+        url: `/veterans/increaseStars`,
+        method: 'PATCH',
+        body,
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
+      } ),
+      providesTags: [ 'Veteran' ],
+    } ),
+
+    
+
 
     //Optimize:  ************************** Roles and permission ******************************
     //******** Get All roles query
-    getRoles: builder.query( {
+    getFollowedVetrens: builder.query( {
       query: ( body ) => ( {
-        url: `/role/all-roles/${body.noOfItems}/${body.pageNumber}`,
+        url: `veterans/current/getfollowedpersons/`,
         method: 'GET',
         headers: {
           'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
         }
 
       } ),
-      // providesTags: [ 'community' ],
+      providesTags: [ 'Veteran' ],
 
     } ),
+    //Optimize:  ************************** Roles and permission ******************************
+    //******** Get All roles query
+    getvetrensMatchingHobbbies: builder.query( {
+      query: ( body ) => ( {
+        url: `veterans/matchinghobbies/${body}`,
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
+        }
 
+      } ),
+      invalidatesTags: [ 'Veteran' ],
 
-
-    // deleteCandidate: builder.mutation( {
-    //   query: ( id ) => ( {
-    //     url: '/candidate/delete-candidate',
-    //     method: 'POST',
-    //     body: {
-    //       id,
-    //     },
-    //     headers: {
-    //       'authorization': `Bearer ${Cookies.get( 'jwt' )}`,
-    //     },
-    //   } ),
-    //   invalidatesTags: [ 'Candidate' ]
-    // } ),
-
-
+    } ),
 
   } )
 
 } );
 
-export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation, useGetFollowedPostsQuery, useGetAllVeteransQuery, useGetSingleVeteranQuery, useFollowPersonMutation, useGetcommunitiesQuery, useGetSingleCommunityQuery, useCreateEventMutation }=nodeAPI;
+export const { useVeteranSignupMutation, useVeteranLoginMutation, useCommunityLoginMutation, useCommunitySignupMutation, useCreatePostMutation, useGetFollowedPostsQuery, useGetAllVeteransQuery, useGetSingleVeteranQuery, useFollowPersonMutation, useGetcommunitiesQuery, useGetSingleCommunityQuery, useCreateEventMutation,useGetVeteranQuery,useSuggestedEventsQuery ,useGetEventQuery,useSendInvitationMutation,useGetAllEventsQuery,useIncreaseStarsMutation,useGetFollowedVetrensQuery,useGetvetrensMatchingHobbbiesQuery}=nodeAPI;
 

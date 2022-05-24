@@ -13,8 +13,8 @@ import { PageHeader } from '../PageHeader';
 
 
 const Dashboard=() => {
-
-  const { data, isLoading, isError }=useGetFollowedPostsQuery();
+ 
+  const { data, isLoading, isError }= useGetFollowedPostsQuery();
 
 
   console.log( !isLoading&&data )
@@ -47,7 +47,7 @@ const Dashboard=() => {
 
 
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4" style={{position:"fixed",right:"0",width:"26%"}}>
             <h4>Upcoming Events</h4>
             <LeftBarEvents />
           </div>

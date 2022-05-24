@@ -21,8 +21,16 @@ const EventSchema=new mongoose.Schema( {
   eventStars:{
     type:Number,
     required: [ true, "Please enter the number of stars for the event!" ],
+    max:5000
+
   
   },
+  hobby:  {
+    type: String,
+    enum: [ "reading", "traveling", "fishing", "crafting", "television", "bird watching", "collecting", "music", "gardening", "video games" ],
+    required: [ true, "Please select a hobby!" ]
+} ,
+  
   location: {
     type: {
       type: String, 

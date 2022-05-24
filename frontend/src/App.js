@@ -15,6 +15,7 @@ import Invitations from "./components/invitations"
 import { Link, Outlet } from 'react-router-dom'
 import Event from "./components/Event"
 import LoginOrgProfile from "./components/LoginOrgProfile"
+import EventsCommunity from './components/EventsCommunity';
 
 
 // import ProtectedRoute from './components/ProtectedRoute.js';
@@ -34,8 +35,6 @@ import AddNewEvent from './components/AddNewEvent/AddNewEvent';
 
 function App() {
 
-
-
   return (
     <>
       <Routes>
@@ -54,7 +53,7 @@ function App() {
         <Route exact path="/userprofile" element={<UserProfile />} />
         <Route exact path="/orgprofile" element={<OrgProfile />} />
         <Route exact path="/loginorgprofile" element={<LoginOrgProfile />} />
-        <Route exact path="/event" element={<Event />} />
+        {/* <Route exact path="/event" element={<Event />} /> */}
 
 
 
@@ -107,7 +106,7 @@ function App() {
           />
           <Route exact path="events" element={
             // <ProtectedRoute role={[ 'admin' ]}>
-            <Events />
+            localStorage.getItem("userType")==='community' ? <EventsCommunity/> : <Events />
             // </ProtectedRoute> 
           }
           />
@@ -133,6 +132,13 @@ function App() {
           <Route exact path="addnewevent" element={
             // <ProtectedRoute role={[ 'admin' ]}>
             <AddNewEvent />
+            // </ProtectedRoute> 
+          }
+          />
+
+          <Route exact path="event" element={
+            // <ProtectedRoute role={[ 'admin' ]}>
+            <Event />
             // </ProtectedRoute> 
           }
           />

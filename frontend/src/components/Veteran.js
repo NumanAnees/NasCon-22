@@ -22,6 +22,7 @@ const Veteran=() => {
   const user=JSON.parse( localStorage.getItem( "user" ) );
 
   const [ followPerson ]=useFollowPersonMutation()
+  
   const handleFollow=async () => {
     const decode=jwtDecode( Cookies.get( 'jwt' ) );
     const vet=localStorage.getItem( 'veteranID' );
@@ -29,12 +30,12 @@ const Veteran=() => {
     const res=await followPerson( vet );
 
 
-
+console.log(res)
     if ( res.data.status==="success" ) {
 
       enqueueSnackbar( "Followed successfully!", { variant: 'success' } );
-
-
+      localStorage.setItem("user",JSON.stringify(res.data.data))
+      
     }
     else {
 

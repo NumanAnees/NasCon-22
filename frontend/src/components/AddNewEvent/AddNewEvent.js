@@ -10,20 +10,28 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import SimpleModal from '../Modal';
 import { useCreateEventMutation } from "../../services/nodeAPI";
-
-
+import { useSelector } from "react-redux";
+import { ResetTvTwoTone } from "@mui/icons-material";
+import { useRef } from "react";
 export default function AddNewEvent( props ) {
   const { Option, OptGroup } = Select;
   const { TextArea } = Input;
   const [createEvent]=useCreateEventMutation();
+  const userData= useSelector((state) => state.User.userData);
+  const formRef = useRef(null);
   const handleSubmit=async (e)=>{
     e.preventDefault();
+    //Should work on the basis of role or type of user
+    eventData.veteranID=userData.id;
+    console.log(eventData);
    const res = await createEvent(eventData);
    console.log(res);
+   e.target.reset()
   }
   
-  const handleChangeCity=()=>{return};
-  const handleChangeCountry=()=>{return};
+  const handleChangeHobby=(e)=>{
+    setEventData( { ...eventData, hobby: e } );
+  };
   
   const handleChangetype=(e)=>{
     setEventData( { ...eventData, eventType: e } );
@@ -49,7 +57,7 @@ export default function AddNewEvent( props ) {
         Event Details
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <div className="row">
             <div className="col-6">
               <div className="row">
@@ -68,7 +76,7 @@ export default function AddNewEvent( props ) {
                 <div className="col-6">
                   <div className="mb-3">
                   
-                    <InputField name="eventStars" label="Event Stars" placeholder='Event Stars' type="number" width={'100%'}  height='32px' onChange={handleOnchange}/>
+                    <InputField name="eventStars" label="Event Stars" placeholder='Event Stars'  width={'100%'}  height='32px' onChange={handleOnchange}/>
 
                   </div>
                 </div>
@@ -123,39 +131,51 @@ export default function AddNewEvent( props ) {
               </div>
               <div className="row">
                 <div className="col-12" style={{marginTop:'0.66rem'}}>
-                  <span>Country</span>
+                  <span>Related Hobby</span>
                   <div>
                   <Select
                       className="my-3"
-                      defaultValue="Country"
+                      defaultValue="Related Hobby"
                       style={{ width: 305 , height: 31 }}
-                      onChange={handleChangeCountry}
+                      onChange={handleChangeHobby}
                     >
-                      <OptGroup label="Country">
-                        <Option value="lahore">Pakistan</Option>
-                        <Option value="karachi">India</Option>
+                      <OptGroup label="Hobby">
+                      <Option value="reading">
+                        reading
+                        </Option>
+                      <Option value="traveling">
+                        traveling
+                        </Option>
+                      <Option value="fishing">
+                        fishing
+                        </Option>
+                      <Option value="crafting">
+                        crafting
+                        </Option>
+                      <Option value="television">
+                        television
+                        </Option>
+                      <Option value="bird watching">
+                        bird watching
+                        </Option>
+                      <Option value="collecting">
+                        collecting 
+                        </Option>
+                      <Option value="music">
+         music
+         </Option>
+                      <Option value="gardening">
+                        gardening
+                        </Option>
+                      <Option value="video games">
+                        video games
+                        </Option>
                       </OptGroup>
                     </Select>
                   </div>
 
                 </div>
-                <div className="col-12" style={{marginTop:'0.66rem'}}>
-                  <span>City</span>
-                  <div>
-                  <Select
-                      className="my-3"
-                      defaultValue="City"
-                      style={{ width: 305 , height: 31 }}
-                      onChange={handleChangeCity}
-                    >
-                      <OptGroup label="City">
-                        <Option value="lahore">Lahore</Option>
-                        <Option value="karachi">Karachi</Option>
-                      </OptGroup>
-                    </Select>
-                  </div>
-
-                </div>
+              
               </div>
             </div>
          

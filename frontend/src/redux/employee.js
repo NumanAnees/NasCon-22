@@ -2,25 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 
 //******* Declare your state variable here
 const initialState={
-  emp_id: null,
-  employeeData: {},
-  emp_pagination: 1,
+  userData:{},
 }
 
-export const employeeSlice=createSlice( {
-  name: 'employeeID',
+export const userSlice=createSlice( {
+  name: 'User',
 
   initialState,
 
   reducers: {
-    setEmployeeID: ( state, action ) => {
-      state.emp_id=action.payload
-    },
-    setEmployeeData: ( state, action ) => {
-      state.employeeData=action.payload
-    },
-    setEmployeePagination: ( state, action ) => {
-      state.emp_pagination=action.payload
+    setUserData: ( state, action ) => {
+      state.userData=action.payload
     },
 
   },
@@ -29,8 +21,8 @@ export const employeeSlice=createSlice( {
 
 
 // Action creators are generated for each case reducer function
-export const { setEmployeeID, setEmployeeData, setEmployeePagination }=employeeSlice.actions
+export const { setUserData }=userSlice.actions
 
-export default employeeSlice.reducer;
+export default userSlice.reducer;
 
 

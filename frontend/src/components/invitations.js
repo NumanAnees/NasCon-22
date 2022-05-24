@@ -5,6 +5,11 @@ import {  Space } from 'antd';
 import { PageHeader } from './PageHeader';
 
 
+const handleAccept=()=>{
+
+};
+
+
 const invitations = () => {
      const columns = [
   {
@@ -32,24 +37,39 @@ const invitations = () => {
     width:150,
     render: (text, record) => (
       <Space size="middle">
-        <a><span className="action-clr">Accept</span></a>
+        <a onClick={handleAccept}><span className="action-clr">Accept</span></a>
         <a><span className='action-clr'>Reject</span></a>
       </Space>
     ),
   },
 ];
 
-const data = [];
-for (let i = 0; i < 5; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    time: "13 july 2020",
-    eventType: `London Park`,
-    stars: "⭐ 2200",
 
-  });
-}
+
+const user = JSON.parse(localStorage.getItem("user"))
+const invitations = user.invitations;
+
+
+let data;
+
+data = invitations.map((el,i)=>{
+
+  return {
+    key: i,
+    name: el.eventID.name,
+    time: el.eventID.eventTime,
+    eventType: el.eventID.eventType,
+    stars: "⭐ "+el.eventID.eventStars,
+  }
+
+
+})
+
+
+
+
+
+
 
   return (
     <>

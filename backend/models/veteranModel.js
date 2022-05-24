@@ -165,6 +165,11 @@ veteranSchema.pre( /^find/, function ( next ) {
     this.populate( { path: "Posts" } )
     next()
 } )
+veteranSchema.pre( /^find/, function ( next ) {
+
+    this.populate( { path: "invitations" } )
+    next()
+} )
 
 // veteranSchema.pre( /^find/, function ( next ) {
 //     // this.find( {

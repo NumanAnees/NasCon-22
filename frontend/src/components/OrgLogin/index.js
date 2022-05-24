@@ -48,14 +48,16 @@ const LoginForm=() => {
       // const decoded=jwt_decode( res.data.web_token );
 
       // console.log( decoded );
+      localStorage.setItem( "user", JSON.stringify( res.data.data.user ) );
 
 
 
       formRef.current.resetFields();
       setCreds( { email: "", password: "" } );
       enqueueSnackbar( "Logged in successfully!", { variant: 'success' } );
-      setTimeout( () => { navigate( '/dashboard' ) }, 2000 );
-
+      setTimeout( () => { navigate( '/dashboard/organizations' ) }, 2000 );
+      
+      localStorage.setItem("userType","community")
 
 
 

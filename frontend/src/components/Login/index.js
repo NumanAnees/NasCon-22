@@ -38,14 +38,14 @@ const LoginForm=() => {
   //******** SUBMIT LOGIN FORM 
   const handleSubmit=async ( e ) => {
     setLoading( true );
-
+    try{
     const res=await veteranLogin( creds )
 
     console.log( res )
 
-    localStorage.setItem( "user", JSON.stringify( res.data.data.user ) );
-
+    
     if ( res.data.status==="success" ) {
+      localStorage.setItem( "user", JSON.stringify( res.data.data.user ) );
       setLoading( false );
       Cookies.set( 'jwt', res.data.token );
       // const decoded=jwt_decode( res.data.web_token );
@@ -59,17 +59,19 @@ const LoginForm=() => {
       enqueueSnackbar( "Logged in successfully!", { variant: 'success' } );
       setTimeout( () => { navigate( '/dashboard' ) }, 2000 );
 
+      localStorage.setItem("userType","veteran")
 
-
-
+      
     }
     else {
       setLoading( false );
       enqueueSnackbar( res.data.message, { variant: 'error' } );
-
+      
     }
-
-
+    
+    
+  }
+    catch(e){}
 
 
 

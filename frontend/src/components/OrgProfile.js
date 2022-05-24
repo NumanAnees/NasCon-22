@@ -61,46 +61,50 @@ const OrgProfile = () => {
 // }
   return (
     <>
-    <div className='row top-marg ml-4'>
-    <div className="col-md-4">
-        <img src={user} alt="user" className="profile-image" />   
-     {/* <Divider orientation="left" plain>
-            hobbies
-      </Divider>
-          <ul className='list-st'>
-            <li>Sky Diving</li>
-            <li>Swimming</li>
-            <li>Cricket</li>
-            <li>Football</li>
-        </ul> */}
-    </div>
-    <div className='col-md-8'> 
-        <h2 className='name'>Numan Anees <AddLocationAltIcon className='icon-clr' /><small className="city">Lahore</small></h2>
-        <small className='profession'>Organization type</small>
-      <div className='d-flex mt-4'>
-    <Button type="primary" shape="round" icon={<PersonAddIcon  size="large"/>}>
-      <span className='follow'>Follow</span>
-      </Button>
-       <Button type="danger" shape="round" icon={<MessageIcon  size="large"/>} className="message">
-      <span className='follow'>Message</span>
-      </Button>
-        </div>
-        <Divider plain>About</Divider>
-        <small className='Contact-info'>Contact Information</small>
-        <h6 className='mt-2 font-12'>Phone:  <span className="clr-blue">+923310145083</span></h6>
-        <h6 className='font-12'>Address:<span className="clr-black">House Number 12 Streat number 2A, Sodiwal Lahore</span></h6>
-        <h6 className='mt-4 font-12'>Email:  <span className="clr-email">user44@gmail.com</span></h6>
-        <div className='mt-4'>
+    {
+      !isLoading && <div className='row top-marg ml-4'>
+      <div className="col-md-4">
+          <img src={user} alt="user" className="profile-image" />   
+       {/* <Divider orientation="left" plain>
+              hobbies
+        </Divider>
+            <ul className='list-st'>
+              <li>Sky Diving</li>
+              <li>Swimming</li>
+              <li>Cricket</li>
+              <li>Football</li>
+          </ul> */}
+      </div>
+      <div className='col-md-8'> 
+          <h2 className='name'>{queryData?.data.name}<AddLocationAltIcon className='icon-clr' /><small className="city">Lahore</small></h2>
+          <small className='profession'>{queryData?.data.type}</small>
+        <div className='d-flex mt-4'>
+      <Button type="primary" shape="round" icon={<PersonAddIcon  size="large"/>}>
+        <span className='follow'>Follow</span>
+        </Button>
+         {/* <Button type="danger" shape="round" icon={<MessageIcon  size="large"/>} className="message">
+        <span className='follow'>Message</span>
+        </Button> */}
+          </div>
+          <Divider plain>About</Divider>
+          <small className='Contact-info'>Contact Information</small>
+          <h6 className='mt-2 font-12'>Phone:  <span className="clr-blue">{queryData?.data.phone}</span></h6>
+          <h6 className='font-12'>Address:<span className="clr-black">House Number 12 Streat number 2A, Sodiwal Lahore</span></h6>
+          <h6 className='mt-4 font-12'>Email:  <span className="clr-email">{queryData.data.email}</span></h6>
+          <div className='mt-4'>
+  
+          </div>
+          <div className='mb-4'></div>
+          <Divider plain>Organization 's Events</Divider>
+          <div className="padding-Table">
+              <TableComp data={data} columns={columns} />
+          </div>
+      
+      </div>
+      </div>
 
-        </div>
-        <div className='mb-4'></div>
-        <Divider plain>Organization 's Events</Divider>
-        <div className="padding-Table">
-            <TableComp data={data} columns={columns} />
-        </div>
-    
-    </div>
-    </div>
+
+    }
   
     </>
   )
